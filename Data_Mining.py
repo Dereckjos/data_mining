@@ -5,6 +5,8 @@ import pandas as pd
 import streamlit as st
 from afinn import Afinn
 
+st.set_option('deprecation.showPyplotGlobalUse', False)
+
 df = pd.read_csv('small.csv', nrows=10000)
 # df.head()
 st.title('ABC News Headlines')
@@ -26,7 +28,6 @@ if text:
     elif text[0] == "Word Cloud":
         st.subheader("Word Cloud")
         st.pyplot(plot_wordcloud(df["headline_text"]))
-
     else:
         st.header("Plotting N-Grams")
         st.subheader("Bigram Plot")
@@ -45,14 +46,12 @@ if model:
         st.subheader("Afinn Model Stats")
         st.pyplot(sentiment_plot(af["Predicted Sentiment"]))
 
-
     elif model[0] == "TextBlob Model":
         st.subheader("TextBlob Model")
         te = textblobModel(df["headline_text"])
         st.write(te)
         st.subheader("TextBlob Model Stats")
         st.pyplot(sentiment_plot(te["Predicted Sentiment"]))
-
 
     elif model[0] == "Vader Lexicon Model":
         st.subheader("Vader Lexicon Model")
@@ -81,7 +80,7 @@ if st.sidebar.button("Click here to view model comparison"):
 
 st.sidebar.header("Sentiment Analysis")
 choice = st.sidebar.multiselect("Select model for prediction",
-                               ("Afinn Lexicon Model", "TextBlob Model"))
+                                ("Afinn Lexicon Model", "TextBlob Model"))
 if choice:
     if choice[0] == "Afinn Lexicon Model":
         st.header("Sentiment Predictor")
@@ -126,33 +125,4 @@ if choice:
                 st.header("Given Sentiment is {}".format(sentiment[0]))
                 st.image('./neutral.png')
 
-
-
-
-
-
-
-
-
-    # if st.button("Predict"):
-    #     afn = Afinn()
-    #     scores = afn.score(text)
-    #     sentiment = ['positive' if score > 0
-    #                  else 'negative' if score < 0
-    #     else 'neutral'
-    #                  for score in scores]
-    #
-    #     if sentiment:
-    #         st.success(sentiment)
-
-
-# plot_top_non_stopwords_barchart(df["headline_text"])
-# plot_top_ngrams_barchart(df['headline_text'],3)
-# plot_top_ngrams_barchart(df['headline_text'],2)
-# plot_wordcloud(df['headline_text'])
-# af = afinnModel(df["headline_text"])
-# te = textblobModel(df["headline_text"])
-# va = vaderModel(df["headline_text"])
-# afinn_graph = sentiment_plot(af["Predicted Sentiment"])
-# textblob_graph = textblob_graph = sentiment_plot(te["Predicted Sentiment"])
-# vader_graph = sentiment_plot(va["Predicted Sentiment"])
+st.sidebar.header('[Topic Modelling Plot](https://lda-vis.herokuapp.com)')
