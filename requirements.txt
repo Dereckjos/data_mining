@@ -1,0 +1,13 @@
+gunicorn==19.9.0
+itsdangerous==1.1.0
+numpy>=1.9.2
+scipy>=0.15.1
+scikit-learn==0.22.1
+matplotlib>=1.4.3
+pandas>=0.19
+streamlit==0.76.0
+afinn==0.1
+textblob==0.15.3
+nltk==3.5
+seaborn==0.11.1
+wordcloud==1.8.1
