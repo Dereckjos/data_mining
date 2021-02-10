@@ -5,7 +5,7 @@ import pandas as pd
 import streamlit as st
 from afinn import Afinn
 
-df = pd.read_csv('abcnews-date-text.csv', nrows=10000)
+df = pd.read_csv('small.csv', nrows=10000)
 # df.head()
 st.title('ABC News Headlines')
 st.subheader('ABC News Dataset')
